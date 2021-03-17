@@ -48,6 +48,15 @@ import java.util.List;
  - создал и реализовал метод draw(Game game) - отображает игровой объект на экране
 
  Шаг 6.
+ 1. В пакете gameobjects создал класс Ship
+ (будет хранить в себе общие свойства космических кораблей)
+ 2. В классе Ship
+ - добавил метод setStaticView(int[][] viewFrame)
+ (будет устанавливать матрицу и задавать анимацию)
+ 3. В пакете gameobjects создал класс EnemyShip и конструктор
+ (корабль представителя вражеского флота)
+
+ Шаг 7.
  */
 
 public class SpaceInvadersGame extends Game {
