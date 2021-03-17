@@ -41,7 +41,13 @@ import java.util.List;
  4. В методе drawField(), у каждого объекта из списка stars вызвал метод draw(Game), для отображения звезд на игровом поле
 
  Шаг 5.
+ 1. В классе GameObject:
+ - добавил поле поле matrix типа int[][]
+ - добавил поля width и height (габаритные размеры объекта)
+ - создал и реализовал метод void setMatrix (сеттер для массива)
+ - создал и реализовал метод draw(Game game) - отображает игровой объект на экране
 
+ Шаг 6.
  */
 
 public class SpaceInvadersGame extends Game {
