@@ -17,6 +17,17 @@ import com.javarush.engine.cell.*;
  2. В методе initialize(), вызвал метод createGame()
 
  Шаг 3.
+ 1. В классе SpaceInvadersGame:
+ - реализовал метод drawField()
+ 2. Создал пакет gameobjects, в нем создал класс GameObject.
+ 3. В классе GameObject:
+ - объявил 2 поля x и y (координаты объекта)
+ - добавил конструктор
+ 4. В пакете gameobjects создал класс Star, который наследуется от класса GameObject
+
+ Шаг 4.
+
+
  */
 
 public class SpaceInvadersGame extends Game {
@@ -43,5 +54,12 @@ public class SpaceInvadersGame extends Game {
     }
 
     // отрисовка поля
-    private void drawField() {}
+    private void drawField() {
+        for (int x = 0; x < HEIGHT; x++) {
+            for (int y = 0; y < WIDTH; y++) {
+                // установить значение ячейки
+                setCellValueEx(x, y, Color.BLACK, "");
+            }
+        }
+    }
 }
