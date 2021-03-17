@@ -11,6 +11,12 @@ import com.javarush.engine.cell.*;
  - в нем вызвал метод setScreenSize(), который задает ширину и высоту игрового поля
 
  Шаг 2.
+ 1. В классе SpaceInvadersGame:
+ создал и реализовал методы:
+ - createGame(), drawScene(), drawField()
+ 2. В методе initialize(), вызвал метод createGame()
+
+ Шаг 3.
  */
 
 public class SpaceInvadersGame extends Game {
@@ -23,5 +29,19 @@ public class SpaceInvadersGame extends Game {
     public void initialize() {
         // задает ширину и высоту
         setScreenSize(WIDTH, HEIGHT);
+        createGame();
     }
+
+    // здесь будем создавать все эл-ты игры
+    private void createGame() {
+        drawScene();
+    }
+
+    // отрисовка эл-тов
+    private void drawScene() {
+        drawField();
+    }
+
+    // отрисовка поля
+    private void drawField() {}
 }
