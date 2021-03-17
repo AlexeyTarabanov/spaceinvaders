@@ -1,6 +1,11 @@
 package com.javarush.games.spaceinvaders;
 
-import com.javarush.engine.cell.*;
+import com.javarush.engine.cell.Color;
+import com.javarush.engine.cell.Game;
+import com.javarush.games.spaceinvaders.gameobjects.Star;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  Шаг 1.
@@ -26,7 +31,16 @@ import com.javarush.engine.cell.*;
  4. В пакете gameobjects создал класс Star, который наследуется от класса GameObject
 
  Шаг 4.
+ 1. В классе Star:
+ - объявил и проинициализировал поле STAR_SIGN (отображение звезды)
+ - объявил и реализовал метод draw()
+ 2. В классе SpaceInvadersGame:
+ - объявил поле List<Star> stars, где будем хранить список звезд
+ - создал и реализовал метод createStars()
+ 3. В методе createGame() вызвал метод createStars()
+ 4. В методе drawField(), у каждого объекта из списка stars вызвал метод draw(Game), для отображения звезд на игровом поле
 
+ Шаг 5.
 
  */
 
@@ -34,6 +48,8 @@ public class SpaceInvadersGame extends Game {
 
     public static final int WIDTH = 64;
     public static final int HEIGHT = 64;
+
+    private List<Star> stars;
 
     // запускает игру
     @Override
@@ -45,6 +61,7 @@ public class SpaceInvadersGame extends Game {
 
     // здесь будем создавать все эл-ты игры
     private void createGame() {
+        createStars();
         drawScene();
     }
 
@@ -60,6 +77,19 @@ public class SpaceInvadersGame extends Game {
                 // установить значение ячейки
                 setCellValueEx(x, y, Color.BLACK, "");
             }
+        }
+
+        // отображение звезд на игровом поле
+        for (Star star : stars) {
+            star.draw(this);
+        }
+    }
+
+    // создает звезды
+    private void createStars() {
+        stars = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            stars.add(new Star(i, i));
         }
     }
 }
