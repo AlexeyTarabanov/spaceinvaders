@@ -1,5 +1,6 @@
 package com.javarush.games.spaceinvaders.gameobjects;
 
+import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 
 import java.util.ArrayList;
@@ -17,9 +18,28 @@ public class EnemyFleet {
     // список кораблей вржеского флота
     private List<EnemyShip> ships;
 
-    // создает корабли и заполнять ими список(ships)
+    public EnemyFleet() {
+        createShips();
+    }
+
+    // создает корабли и заполняет ими список(ships)
     private void createShips() {
+
         ships = new ArrayList<>();
+
+        // учли, что оптимальным расстоянием от верхней границы экрана до первого сверху ряда кораблей будет 12 ячеек.
+        for (int x = 0; x < COLUMNS_COUNT; x++) {
+            for (int y = 0; y < ROWS_COUNT; y++) {
+                ships.add(new EnemyShip(x * STEP, y * STEP + 12));
+            }
+        }
+    }
+
+    // отрисовка вражеских кораблей
+    public void draw(Game game) {
+        for (EnemyShip enemyShip : ships) {
+            enemyShip.draw(game);
+        }
     }
 
 }

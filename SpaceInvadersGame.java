@@ -2,6 +2,7 @@ package com.javarush.games.spaceinvaders;
 
 import com.javarush.engine.cell.Color;
 import com.javarush.engine.cell.Game;
+import com.javarush.games.spaceinvaders.gameobjects.EnemyFleet;
 import com.javarush.games.spaceinvaders.gameobjects.Star;
 
 import java.util.ArrayList;
@@ -67,6 +68,16 @@ import java.util.List;
  - создал метод createShips(). Проинициализировал в нем поле ships
 
  Шаг 8.
+ 1. В классе SpaceInvadersGame:
+ - создал поле enemyFleet и проинициализировал в методе createGame()
+ - переопредилил метод onTurn(int) родительского класса Game
+ (все, что будет происходить на каждом шаге, выполняется в этом методе)
+ 2. В классе EnemyFleet:
+ - создал конструктор
+ - реализовал метод createShips
+
+ Шаг 9.
+ 1.
 
  */
 
@@ -76,6 +87,8 @@ public class SpaceInvadersGame extends Game {
     public static final int HEIGHT = 64;
 
     private List<Star> stars;
+
+    private EnemyFleet enemyFleet;
 
     // запускает игру
     @Override
@@ -88,12 +101,22 @@ public class SpaceInvadersGame extends Game {
     // здесь будем создавать все эл-ты игры
     private void createGame() {
         createStars();
+        enemyFleet = new EnemyFleet();
+        drawScene();
+        // задает частоту работы этого метода onTurn
+        setTurnTimer(40);
+    }
+
+    // все, что будет происходить на каждом шаге, выполняется в этом методе
+    @Override
+    public void onTurn(int step) {
         drawScene();
     }
 
     // отрисовка эл-тов
     private void drawScene() {
         drawField();
+        enemyFleet.draw(this);
     }
 
     // отрисовка поля
