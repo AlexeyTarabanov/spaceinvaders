@@ -99,6 +99,10 @@ import java.util.List;
   -
 
  Шаг 11.
+ 1. В классе EnemyFleet:
+  - реализовал метод move()
+
+ Шаг 12.
  1.
 
  */

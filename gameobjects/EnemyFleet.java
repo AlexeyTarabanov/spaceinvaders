@@ -3,6 +3,7 @@ package com.javarush.games.spaceinvaders.gameobjects;
 import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
+import com.javarush.games.spaceinvaders.SpaceInvadersGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,27 @@ public class EnemyFleet {
     }
 
     // движение
+    // когда корабли подлетают к краю экрана, они меняют направление на противоположное и опускаются ниже.
     public void move() {
+        boolean flag = false;
 
+        if (!ships.isEmpty()) {
+            if (direction == Direction.LEFT && getLeftBorder() < 0) {
+                direction = Direction.RIGHT;
+                flag = true;
+            }
+            if (direction == Direction.RIGHT && getRightBorder() > SpaceInvadersGame.WIDTH) {
+                direction = Direction.LEFT;
+                flag = true;
+            }
+
+            for (EnemyShip ship : ships) {
+                if (flag) {
+                    ship.move(Direction.DOWN, getSpeed());
+                } else {
+                    ship.move(direction, getSpeed());
+                }
+            }
+        }
     }
 }
