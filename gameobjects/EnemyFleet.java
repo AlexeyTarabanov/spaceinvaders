@@ -42,4 +42,28 @@ public class EnemyFleet {
         }
     }
 
+    // получаем левую границу
+    // возвращает минимальную координату x среди всех вражеских кораблей из списка ships
+    private double getLeftBorder() {
+        double min = ships.get(0).x;
+
+        for (EnemyShip ship : ships) {
+            if (ship.x < min)
+                min = ship.x;
+        }
+        return min;
+    }
+
+    // получаем правую границу
+    // возвращает максимальное из значений (x + width) среди всех вражеских кораблей из списка ships
+    private double getRightBorder() {
+        double max = ships.get(0).x + ships.get(0).width;
+
+        for (EnemyShip ship : ships) {
+            if ((ship.x + ship.width) > max)
+                max = ship.x + ship.width;
+        }
+        return max;
+    }
+
 }
