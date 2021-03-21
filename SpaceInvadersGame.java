@@ -89,6 +89,16 @@ import java.util.List;
  (возвращает максимальное из значений (x + width) среди всех вражеских кораблей из списка ships)
 
  Шаг 10.
+ 1. В классе EnemyFleet:
+  - создал и проинициализировал поле Direction direction
+ (напрвление движения)
+  - создал и реализовал метод getSpeed()
+  - создал метод move()
+ (движение)
+ 2. В классе SpaceInvadersGame:
+  -
+
+ Шаг 11.
  1.
 
  */
@@ -122,6 +132,8 @@ public class SpaceInvadersGame extends Game {
     // все, что будет происходить на каждом шаге, выполняется в этом методе
     @Override
     public void onTurn(int step) {
+        // так как корабли передвигаются на каждом такте игры
+        moveSpaceObjects();
         drawScene();
     }
 
@@ -152,5 +164,10 @@ public class SpaceInvadersGame extends Game {
         for (int i = 0; i < 8; i++) {
             stars.add(new Star(i, i));
         }
+    }
+
+    // будет двигать объекты
+    private void moveSpaceObjects() {
+        enemyFleet.move();
     }
 }
