@@ -34,6 +34,7 @@ public class GameObject {
             for (int j = 0; j < height; j++) {
                 // для каждой ячейки матрицы matrix вызываем метод setCellValueEx
                 game.setCellValueEx( (int) (x + i), (int) (y + j), Color.values()[matrix[j][i]], "");
+                //game.setCellValueEx( (int) (x + i), (int) (y + j), Color.YELLOW, "");
             }
         }
     }
