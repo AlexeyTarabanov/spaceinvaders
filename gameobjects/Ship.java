@@ -12,4 +12,8 @@ public class Ship extends GameObject {
         setMatrix(viewFrame);
 
     }
+
+    public Bullet fire() {
+        return null;
+    }
 }

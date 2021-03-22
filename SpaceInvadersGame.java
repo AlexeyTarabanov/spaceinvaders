@@ -113,6 +113,16 @@ import java.util.List;
   - создал и реализовал метод move()
 
  Шаг 13.
+ 1. В классе SpaceInvadersGame:
+  - создал переменную COMPLEXITY
+ (отвечает за сложность игры - вероятность выстрела вражеского корабля за один шаг игры)
+ 2. В классе Ship:
+  - создал метод fire()
+ (так как экземпляр этого класса мы не будем создавать - реализовывать метод будем в классах-наследниках)
+ 3. В классе EnemyShip:
+  - переопредилил и реализовал метод fire()
+
+ Шаг 14.
  1.
 
  */
@@ -125,6 +135,9 @@ public class SpaceInvadersGame extends Game {
     private List<Star> stars;
 
     private EnemyFleet enemyFleet;
+
+    // сложность игры
+    public static final int COMPLEXITY = 5;
 
     // запускает игру
     @Override
