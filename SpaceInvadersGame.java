@@ -2,10 +2,12 @@ package com.javarush.games.spaceinvaders;
 
 import com.javarush.engine.cell.Color;
 import com.javarush.engine.cell.Game;
+import com.javarush.games.spaceinvaders.gameobjects.Bullet;
 import com.javarush.games.spaceinvaders.gameobjects.EnemyFleet;
 import com.javarush.games.spaceinvaders.gameobjects.Star;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -127,7 +129,18 @@ import java.util.List;
   - создал и реализовал метод fire()
 
  Шаг 15.
- 1.
+ 1. В классе SpaceInvadersGame:
+ - создал переменную  enemyBullets типа List<Bullet>
+ (вражеские пули)
+ - добавил их отрисовку и движение
+ - создал и реализовал метод removeDeadBullets()
+ (удаляет вражеские пули)
+ - создал метод check()
+ (различные проверки на каждом шаге игры)
+
+ Шаг 16.
+ 1. 
+
  */
 
 public class SpaceInvadersGame extends Game {
@@ -141,6 +154,8 @@ public class SpaceInvadersGame extends Game {
 
     // сложность игры
     public static final int COMPLEXITY = 5;
+    // вражеские пули
+    private List<Bullet>  enemyBullets;
 
     // запускает игру
     @Override
@@ -154,6 +169,7 @@ public class SpaceInvadersGame extends Game {
     private void createGame() {
         createStars();
         enemyFleet = new EnemyFleet();
+        enemyBullets = new ArrayList<>();
         drawScene();
         // задает частоту работы этого метода onTurn
         setTurnTimer(40);
@@ -164,6 +180,12 @@ public class SpaceInvadersGame extends Game {
     public void onTurn(int step) {
         // так как корабли передвигаются на каждом такте игры
         moveSpaceObjects();
+        check();
+        Bullet bullet = enemyFleet.fire(this);
+        // если выстрел произошел - возвращаем пулю в список
+        if (bullet != null) {
+            enemyBullets.add(bullet);
+        }
         drawScene();
     }
 
@@ -171,6 +193,9 @@ public class SpaceInvadersGame extends Game {
     private void drawScene() {
         drawField();
         enemyFleet.draw(this);
+        for (Bullet bullet : enemyBullets) {
+            bullet.draw(this);
+        }
     }
 
     // отрисовка поля
@@ -199,5 +224,28 @@ public class SpaceInvadersGame extends Game {
     // будет двигать объекты
     private void moveSpaceObjects() {
         enemyFleet.move();
+        for (Bullet bullet : enemyBullets) {
+            bullet.move();
+        }
+    }
+
+    // удаляет вражеские пули
+    private void removeDeadBullets() {
+
+        // создаем итератор
+        Iterator<Bullet> bulletIterator = enemyBullets.iterator();
+        // до тех пор, пока в списке есть элементы
+        while (bulletIterator.hasNext()) {
+            // получаем следующий элемент
+            Bullet bulletNext = bulletIterator.next();
+            // если пуля потрачена (нежива - попала в цель) или вылетела за пределы экрана
+            if (!bulletNext.isAlive || bulletNext.y >= HEIGHT - 1)
+                bulletIterator.remove();
+        }
+    }
+
+    // проверки
+    private void check() {
+        removeDeadBullets();
     }
 }
