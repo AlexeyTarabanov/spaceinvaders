@@ -101,4 +101,15 @@ public class EnemyFleet {
             }
         }
     }
+
+    // вызывает метод fire у одного из кораблей флота, выбранного случайно.
+    // кроме того, флот будет стрелять с вероятностью COMPLEXITY процентов.
+    public Bullet fire(Game game) {
+        if (ships.isEmpty())
+            return null;
+        if (game.getRandomNumber(100 / SpaceInvadersGame.COMPLEXITY) > 0)
+            return null;
+
+        return ships.get(game.getRandomNumber(ships.size())).fire();
+    }
 }

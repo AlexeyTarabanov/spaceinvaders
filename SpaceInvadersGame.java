@@ -123,8 +123,11 @@ import java.util.List;
   - переопредилил и реализовал метод fire()
 
  Шаг 14.
- 1.
+ 1. В классе EnemyFleet:
+  - создал и реализовал метод fire()
 
+ Шаг 15.
+ 1.
  */
 
 public class SpaceInvadersGame extends Game {
