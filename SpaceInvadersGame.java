@@ -4,6 +4,7 @@ import com.javarush.engine.cell.Color;
 import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.gameobjects.Bullet;
 import com.javarush.games.spaceinvaders.gameobjects.EnemyFleet;
+import com.javarush.games.spaceinvaders.gameobjects.PlayerShip;
 import com.javarush.games.spaceinvaders.gameobjects.Star;
 
 import java.util.ArrayList;
@@ -149,6 +150,13 @@ import java.util.List;
   - создал и реализовал метод kill()
 
  Шаг 17.
+ 1. В классе PlayerShip
+  - создал и реализовал метод verifyHit
+ (проверяет попали ли вражеские пули в корабль игрока)
+ 2. В классе SpaceInvadersGame:
+  - создал и проинициализировал переменную PlayerShip playerShip
+
+ Шаг 18.
  1.
 
  */
@@ -166,6 +174,8 @@ public class SpaceInvadersGame extends Game {
     public static final int COMPLEXITY = 5;
     // вражеские пули
     private List<Bullet>  enemyBullets;
+    // корабль игрока
+    private PlayerShip playerShip;
 
     // запускает игру
     @Override
@@ -180,6 +190,7 @@ public class SpaceInvadersGame extends Game {
         createStars();
         enemyFleet = new EnemyFleet();
         enemyBullets = new ArrayList<>();
+        playerShip = new PlayerShip();
         drawScene();
         // задает частоту работы этого метода onTurn
         setTurnTimer(40);
@@ -203,6 +214,7 @@ public class SpaceInvadersGame extends Game {
     private void drawScene() {
         drawField();
         enemyFleet.draw(this);
+        playerShip.draw(this);
         for (Bullet bullet : enemyBullets) {
             bullet.draw(this);
         }
@@ -256,6 +268,7 @@ public class SpaceInvadersGame extends Game {
 
     // проверки
     private void check() {
+        playerShip.verifyHit(enemyBullets);
         removeDeadBullets();
     }
 }

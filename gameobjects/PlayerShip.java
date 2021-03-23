@@ -3,6 +3,8 @@ package com.javarush.games.spaceinvaders.gameobjects;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 import com.javarush.games.spaceinvaders.SpaceInvadersGame;
 
+import java.util.List;
+
 // корабль игрока
 public class PlayerShip extends Ship {
 
@@ -11,5 +13,20 @@ public class PlayerShip extends Ship {
         super(SpaceInvadersGame.WIDTH / 2.0, SpaceInvadersGame.HEIGHT - ShapeMatrix.PLAYER.length - 1);
         // задаем внешний вид корабля
         setStaticView(ShapeMatrix.PLAYER);
+    }
+
+    // проверяет попали ли вражеские пули в корабль игрока
+    public void verifyHit(List<Bullet> bullets) {
+        if (!bullets.isEmpty()) {
+            if (this.isAlive) {
+                for (Bullet bullet : bullets) {
+                    // проверяем "жива" ли пуля и пересечение игрока с этой пулей
+                    if (bullet.isAlive && isCollision(bullet)) {
+                        kill();
+                        bullet.kill();
+                    }
+                }
+            }
+        }
     }
 }
