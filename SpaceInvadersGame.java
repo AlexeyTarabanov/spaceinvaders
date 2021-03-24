@@ -2,6 +2,7 @@ package com.javarush.games.spaceinvaders;
 
 import com.javarush.engine.cell.Color;
 import com.javarush.engine.cell.Game;
+import com.javarush.engine.cell.Key;
 import com.javarush.games.spaceinvaders.gameobjects.Bullet;
 import com.javarush.games.spaceinvaders.gameobjects.EnemyFleet;
 import com.javarush.games.spaceinvaders.gameobjects.PlayerShip;
@@ -168,8 +169,23 @@ import java.util.List;
   - реализовал метод kill() базового класса
 
  Шаг 20.
- 1.
+ 1. В классе Ship:
+  - создал и реализовал метод nextFrame
+ (устанавливает в поле matrix следующий кадр анимации, если это возможно)
+ 2. Расширим функционал метода draw
 
+ Шаг 21.
+ 1. В классе SpaceInvadersGame:
+  - создал и реализовал метод stopGame()
+
+ Шаг 22.
+ 1. В классе PlayerShip:
+  - добавил поле Direction, проинициализировал его, добавил сеттер для него
+ 2. В классе SpaceInvadersGame:
+  - переопределил метод onKeyPress
+
+ Шаг 23.
+ 1.
 
  */
 
@@ -189,6 +205,9 @@ public class SpaceInvadersGame extends Game {
     // корабль игрока
     private PlayerShip playerShip;
 
+    private boolean isGameStopped;
+    private int animationsCount;
+
     // запускает игру
     @Override
     public void initialize() {
@@ -203,6 +222,8 @@ public class SpaceInvadersGame extends Game {
         enemyFleet = new EnemyFleet();
         enemyBullets = new ArrayList<>();
         playerShip = new PlayerShip();
+        isGameStopped = false;
+        animationsCount = 0;
         drawScene();
         // задает частоту работы этого метода onTurn
         setTurnTimer(40);
@@ -282,5 +303,41 @@ public class SpaceInvadersGame extends Game {
     private void check() {
         playerShip.verifyHit(enemyBullets);
         removeDeadBullets();
+        // если пуля попала в игрока, перед остановкой игры нужно успеть показать анимацию взрыва
+        if (!playerShip.isAlive) {
+            stopGameWithDelay();
+        }
+    }
+
+    // останавливает игру и выводить соответствующее сообщение на экран
+    private void stopGame(boolean isWin) {
+        isGameStopped = true;
+        stopTurnTimer();
+        if (isWin) {
+            showMessageDialog(Color.BLACK, "Ты выиграл!", Color.GREEN, 75);
+        } else {
+            showMessageDialog(Color.BLACK, "Game Over", Color.RED, 75);
+        }
+    }
+
+    private void stopGameWithDelay() {
+        animationsCount++;
+        if (animationsCount >= 10) {
+            stopGame(playerShip.isAlive);
+        }
+    }
+
+    // считывает команды игрока (нажатия клавиш)
+    @Override
+    public void onKeyPress(Key key) {
+        if (key == Key.SPACE && isGameStopped) {
+            createGame();
+        }
+        if (key == Key.LEFT) {
+            playerShip.setDirection(Direction.LEFT);
+        }
+        if (key == Key.RIGHT) {
+            playerShip.setDirection(Direction.RIGHT);
+        }
     }
 }

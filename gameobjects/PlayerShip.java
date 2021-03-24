@@ -1,5 +1,6 @@
 package com.javarush.games.spaceinvaders.gameobjects;
 
+import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 import com.javarush.games.spaceinvaders.SpaceInvadersGame;
 
@@ -7,6 +8,15 @@ import java.util.List;
 
 // корабль игрока
 public class PlayerShip extends Ship {
+
+    // направление движения
+    private Direction direction = Direction.UP;
+
+    public void setDirection(Direction newDirection) {
+        if (newDirection != Direction.DOWN) {
+            this.direction = newDirection;
+        }
+    }
 
     public PlayerShip() {
         // отображаем корабль внизу экрана по центру
@@ -38,4 +48,6 @@ public class PlayerShip extends Ship {
                     ShapeMatrix.KILL_PLAYER_ANIMATION_THIRD, ShapeMatrix.DEAD_PLAYER);
         }
     }
+
+
 }
