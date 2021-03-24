@@ -190,6 +190,13 @@ import java.util.List;
  (движение корабля игрока)
 
  Шаг 24.
+ 1. В классе PlayerShip:
+  - добавил геттер к полю Direction
+ 2. В классе SpaceInvadersGame:
+  - переопределил и реализовал метод onKeyReleased(Key)
+ (вызывается при отпускании клавиш)
+
+ Шаг 25.
  1.
 
  */
@@ -345,5 +352,20 @@ public class SpaceInvadersGame extends Game {
         if (key == Key.RIGHT) {
             playerShip.setDirection(Direction.RIGHT);
         }
+    }
+
+    // вызывается при отпускании клавиш
+    @Override
+    public void onKeyReleased(Key key) {
+        //Если корабль игрока движется, в результате работы метода onKeyReleased(Key)
+        // состояние поля direction у игрока изменится на Direction.UP
+        // и, как следствие, корабль прекратит движение.
+        if (key == Key.LEFT && playerShip.getDirection() == Direction.LEFT) {
+            playerShip.setDirection(Direction.UP);
+        }
+        if (key == Key.RIGHT && playerShip.getDirection() == Direction.RIGHT) {
+            playerShip.setDirection(Direction.UP);
+        }
+
     }
 }

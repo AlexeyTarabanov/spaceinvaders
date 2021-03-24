@@ -18,6 +18,10 @@ public class PlayerShip extends Ship {
         }
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public PlayerShip() {
         // отображаем корабль внизу экрана по центру
         super(SpaceInvadersGame.WIDTH / 2.0, SpaceInvadersGame.HEIGHT - ShapeMatrix.PLAYER.length - 1);
