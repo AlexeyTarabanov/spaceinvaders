@@ -185,6 +185,11 @@ import java.util.List;
   - переопределил метод onKeyPress
 
  Шаг 23.
+ 1. В классе PlayerShip:
+  - создал и реализовал метод move()
+ (движение корабля игрока)
+
+ Шаг 24.
  1.
 
  */
@@ -282,6 +287,7 @@ public class SpaceInvadersGame extends Game {
         for (Bullet bullet : enemyBullets) {
             bullet.move();
         }
+        playerShip.move();
     }
 
     // удаляет вражеские пули
