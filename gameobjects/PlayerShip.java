@@ -69,4 +69,13 @@ public class PlayerShip extends Ship {
             }
         }
     }
+
+    // создает пули
+    @Override
+    public Bullet fire() {
+        if (!isAlive) {
+            return null;
+        }
+        return new Bullet(x + 2, y - ShapeMatrix.BULLET.length, Direction.UP);
+    }
 }

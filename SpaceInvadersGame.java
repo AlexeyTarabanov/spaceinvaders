@@ -197,6 +197,13 @@ import java.util.List;
  (вызывается при отпускании клавиш)
 
  Шаг 25.
+ 1. В классе PlayerShip:
+ - переопределил и реализовал метод fire()
+ (создает пули)
+ - добавил поле поле playerBullets типа List<Bullet>
+ (пули игрока)
+
+ Шаг 26.
  1.
 
  */
@@ -216,6 +223,8 @@ public class SpaceInvadersGame extends Game {
     private List<Bullet>  enemyBullets;
     // корабль игрока
     private PlayerShip playerShip;
+    // пули игрока
+    private List<Bullet> playerBullets;
 
     private boolean isGameStopped;
     private int animationsCount;
@@ -236,6 +245,7 @@ public class SpaceInvadersGame extends Game {
         playerShip = new PlayerShip();
         isGameStopped = false;
         animationsCount = 0;
+        playerBullets = new ArrayList<>();
         drawScene();
         // задает частоту работы этого метода onTurn
         setTurnTimer(40);
@@ -261,6 +271,9 @@ public class SpaceInvadersGame extends Game {
         enemyFleet.draw(this);
         playerShip.draw(this);
         for (Bullet bullet : enemyBullets) {
+            bullet.draw(this);
+        }
+        for (Bullet bullet : playerBullets) {
             bullet.draw(this);
         }
     }
@@ -295,6 +308,9 @@ public class SpaceInvadersGame extends Game {
             bullet.move();
         }
         playerShip.move();
+        for (Bullet bullet : playerBullets) {
+            bullet.move();
+        }
     }
 
     // удаляет вражеские пули
@@ -366,6 +382,5 @@ public class SpaceInvadersGame extends Game {
         if (key == Key.RIGHT && playerShip.getDirection() == Direction.RIGHT) {
             playerShip.setDirection(Direction.UP);
         }
-
     }
 }
