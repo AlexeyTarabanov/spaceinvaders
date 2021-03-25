@@ -57,4 +57,13 @@ public class Ship extends GameObject {
         super.draw(game);
         nextFrame();
     }
+
+    // будет возвращать false после того, как у "неживого" корабля отобразится вся анимация
+    public boolean isVisible() {
+        if (!isAlive && frameIndex >= frames.size()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

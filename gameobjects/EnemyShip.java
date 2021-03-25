@@ -31,4 +31,15 @@ public class EnemyShip extends Ship{
     public Bullet fire() {
         return new Bullet(x + 1, y + height, Direction.DOWN);
     }
+
+    // уничтожение вражеского корабля
+    @Override
+    public void kill() {
+        if (isAlive) {
+            isAlive = false;
+            // задает матрицы для анимации уничтожения
+            setAnimatedView(ShapeMatrix.KILL_ENEMY_ANIMATION_FIRST, ShapeMatrix.KILL_ENEMY_ANIMATION_SECOND,
+                    ShapeMatrix.KILL_ENEMY_ANIMATION_THIRD);
+        }
+    }
 }
