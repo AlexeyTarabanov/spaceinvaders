@@ -200,10 +200,18 @@ import java.util.List;
  1. В классе PlayerShip:
  - переопределил и реализовал метод fire()
  (создает пули)
+ 2. В классе SpaceInvadersGame:
  - добавил поле поле playerBullets типа List<Bullet>
  (пули игрока)
 
  Шаг 26.
+ 1. В классе SpaceInvadersGame:
+ - создал и проинициализировал переменную PLAYER_BULLETS_MAX
+ (максимальное количество пуль игрока)
+ - в метод onKeyPress(key) добавил возможность стрелять по нажатию клавиши пробел
+ - переопределил метод setCellValueEx(int, int, Color, String)
+
+ Шаг 27.
  1.
 
  */
@@ -225,6 +233,8 @@ public class SpaceInvadersGame extends Game {
     private PlayerShip playerShip;
     // пули игрока
     private List<Bullet> playerBullets;
+    // максимальное количество пуль
+    private static final int PLAYER_BULLETS_MAX = 1;
 
     private boolean isGameStopped;
     private int animationsCount;
@@ -326,6 +336,8 @@ public class SpaceInvadersGame extends Game {
             if (!bulletNext.isAlive || bulletNext.y >= HEIGHT - 1)
                 bulletIterator.remove();
         }
+
+        playerBullets.removeIf(bullet -> !bullet.isAlive || (bullet.y + bullet.height) < 0);
     }
 
     // проверки
@@ -368,19 +380,31 @@ public class SpaceInvadersGame extends Game {
         if (key == Key.RIGHT) {
             playerShip.setDirection(Direction.RIGHT);
         }
+
+        if (key == Key.SPACE) {
+            Bullet bullet = playerShip.fire();
+            if (bullet != null && playerBullets.size() < PLAYER_BULLETS_MAX) {
+                playerBullets.add(bullet);
+            }
+        }
     }
 
     // вызывается при отпускании клавиш
     @Override
     public void onKeyReleased(Key key) {
-        //Если корабль игрока движется, в результате работы метода onKeyReleased(Key)
-        // состояние поля direction у игрока изменится на Direction.UP
-        // и, как следствие, корабль прекратит движение.
         if (key == Key.LEFT && playerShip.getDirection() == Direction.LEFT) {
             playerShip.setDirection(Direction.UP);
         }
         if (key == Key.RIGHT && playerShip.getDirection() == Direction.RIGHT) {
             playerShip.setDirection(Direction.UP);
+        }
+    }
+
+    @Override
+    public void setCellValueEx(int x, int y, Color cellColor, String value) {
+        // если параметры метода x или y находятся внутри поля
+        if (x < WIDTH && x > 0 && y > 0 && y < HEIGHT) {
+            super.setCellValueEx(x, y, cellColor, value);
         }
     }
 }
