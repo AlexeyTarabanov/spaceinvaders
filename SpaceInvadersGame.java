@@ -244,6 +244,20 @@ import java.util.List;
  - переопределил и реализовал метод kill()
 
  Шаг 31.
+ 1. В классе Ship:
+  - создал и проинициализировал поле loopAnimation
+ (петля анимации)
+  - заменил метод setAnimatedView(int[][]... viewFrames) на
+ setAnimatedView(boolean isLoopAnimation, int[][]... viewFrames)
+ (отвечает за бесконечность анимации)
+  2. Отрефакторил методы:
+   - nextFrame() класса Ship
+   - kill() класса PlayerShip
+   - kill() класса EnemyShip
+   - kill() класса Boss
+   - конструктор класса Boss
+
+ Шаг 32.
  1.
 
  */

@@ -14,6 +14,8 @@ public class Ship extends GameObject {
     private List<int[][]> frames;
     // индекс текущего кадра анимации
     private int frameIndex;
+    // петля анимации
+    private boolean loopAnimation = false;
 
     public Ship(double x, double y) {
         super(x, y);
@@ -28,8 +30,8 @@ public class Ship extends GameObject {
     }
 
     // передает кадры анимации
-    // Он принимает массив кадров(матриц) и передает их списку frames.
-    public void setAnimatedView(int[][]... viewFrames) {
+    public void setAnimatedView(boolean isLoopAnimation, int[][]... viewFrames) {
+        loopAnimation = isLoopAnimation;
         setMatrix(viewFrames[0]);
         frames = Arrays.asList(viewFrames);
         frameIndex = 0;
@@ -46,7 +48,10 @@ public class Ship extends GameObject {
     // перключает на следующий кадр анимации
     // устанавливает в поле matrix следующий кадр анимации, если это возможно
     public void nextFrame() {
-        frameIndex += 1;
+        frameIndex++;
+        if (frameIndex >= frames.size() && loopAnimation) {
+            frameIndex = 0;
+        }
         if (frameIndex < frames.size()) {
             matrix = frames.get(frameIndex);
         }
