@@ -114,4 +114,22 @@ public class EnemyFleet {
 
         return ships.get(game.getRandomNumber(ships.size())).fire();
     }
+
+    // проверка попаданий пуль игрока во вражеские корабли
+    public void verifyHit(List<Bullet> bullets) {
+        for (Ship ship : ships) {
+            for (Bullet bullet : bullets) {
+                // если пересечение корабля и пули есть и корабль "жив" и эта пуля "живая"
+                if (ship.isCollision(bullet) && ship.isAlive && bullet.isAlive) {
+                    ship.kill();
+                    bullet.kill();
+                }
+            }
+        }
+    }
+
+    // удаляет из списка "убитые" корабли
+    public void deleteHiddenShips() {
+        ships.removeIf(ship -> !ship.isVisible());
+    }
 }

@@ -220,6 +220,13 @@ import java.util.List;
  (будет возвращать false после того, как у "неживого" корабля отобразится вся анимация)
 
  Шаг 28.
+ 1. В классе EnemyFleet:
+  - создал и реализовал метод verifyHit(List<Bullet> bullets)
+ (проверка попаданий пуль игрока во вражеские корабли)
+ - создал и реализовал метод deleteHiddenShips()
+ (удаляет из списка "убитые" корабли)
+
+ Шаг 29.
  1.
 
  */
@@ -351,6 +358,8 @@ public class SpaceInvadersGame extends Game {
     // проверки
     private void check() {
         playerShip.verifyHit(enemyBullets);
+        enemyFleet.verifyHit(playerBullets);
+        enemyFleet.deleteHiddenShips();
         removeDeadBullets();
         // если пуля попала в игрока, перед остановкой игры нужно успеть показать анимацию взрыва
         if (!playerShip.isAlive) {
