@@ -25,7 +25,6 @@ public class ShapeMatrix {
             {5, 5, 5, 5, 5}
     };
 
-
     public static final int[][] BULLET = new int[][]{
             {2},
             {2}
@@ -65,5 +64,50 @@ public class ShapeMatrix {
             {0, 4, 0, 4, 0},
             {4, 0, 4, 0, 4},
             {0, 4, 0, 4, 0}
+    };
+
+    public static final int[][] KILL_BOSS_ANIMATION_FIRST = new int[][]{
+            {4, 4, 4, 4, 4, 4, 4},
+            {4, 4, 4, 4, 4, 4, 4},
+            {4, 4, 4, 4, 4, 4, 4},
+            {4, 4, 4, 4, 4, 4, 4},
+            {4, 4, 4, 4, 4, 4, 4},
+            {4, 4, 4, 4, 4, 4, 4}
+    };
+
+    public static final int[][] KILL_BOSS_ANIMATION_SECOND = new int[][]{
+            {4, 0, 0, 4, 0, 0, 4},
+            {0, 4, 0, 4, 0, 4, 0},
+            {0, 0, 4, 4, 4, 0, 0},
+            {0, 0, 4, 4, 4, 0, 0},
+            {0, 4, 0, 4, 0, 4, 0},
+            {4, 0, 0, 4, 0, 0, 4}
+    };
+
+    public static final int[][] KILL_BOSS_ANIMATION_THIRD = new int[][]{
+            {0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 4, 4, 4, 0, 0},
+            {0, 0, 4, 4, 4, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0}
+    };
+
+    public static final int[][] BOSS_ANIMATION_FIRST = new int[][]{
+            {0, 0, 4, 0, 4, 0, 0},
+            {0, 2, 2, 2, 2, 2, 0},
+            {4, 2, 0, 2, 0, 2, 0},
+            {4, 2, 2, 2, 2, 2, 4},
+            {0, 0, 4, 4, 4, 0, 4},
+            {0, 0, 4, 0, 4, 0, 0}
+    };
+
+    public static final int[][] BOSS_ANIMATION_SECOND = new int[][]{
+            {0, 0, 4, 0, 4, 0, 0},
+            {0, 2, 2, 2, 2, 2, 0},
+            {0, 2, 0, 2, 0, 2, 4},
+            {4, 2, 2, 2, 2, 2, 4},
+            {4, 0, 4, 4, 4, 0, 0},
+            {0, 0, 4, 0, 4, 0, 0}
     };
 }
