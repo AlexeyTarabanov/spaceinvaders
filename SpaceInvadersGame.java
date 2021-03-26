@@ -258,6 +258,17 @@ import java.util.List;
    - конструктор класса Boss
 
  Шаг 32.
+ 1. В классе EnemyFleet:
+  - создал и реализовал метод getBottomBorder()
+ (определяет координаты нижней границы вражеского флота)
+  - создал и реализовал метод getShipsCount()
+ (возвращает количество оставшихся кораблей вражеского флота)
+ 2. В классе PlayerShip:
+  - создал и реализовал метод win()
+ 3. В классе SpaceInvadersGame:
+  - в методе check() добавил условие проверки
+
+ Шаг 33.
  1.
 
  */
@@ -394,6 +405,14 @@ public class SpaceInvadersGame extends Game {
         removeDeadBullets();
         // если пуля попала в игрока, перед остановкой игры нужно успеть показать анимацию взрыва
         if (!playerShip.isAlive) {
+            stopGameWithDelay();
+        }
+     //необходимо вызвать метод getBottomBorder() у объекта enemyFleet.
+        if (enemyFleet.getBottomBorder() >= playerShip.y) {
+            playerShip.kill();
+        }
+        if (enemyFleet.getShipsCount() == 0) {
+            playerShip.win();
             stopGameWithDelay();
         }
     }

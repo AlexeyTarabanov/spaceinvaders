@@ -134,4 +134,20 @@ public class EnemyFleet {
     public void deleteHiddenShips() {
         ships.removeIf(ship -> !ship.isVisible());
     }
+
+    // определяет координаты нижней границы вражеского флота
+    public double getBottomBorder() {
+        double bottom = 0;
+        for (EnemyShip ship : ships) {
+            if ((ship.y + ship.height) > bottom) {
+                bottom = ship.y + ship.height;
+            }
+        }
+        return bottom;
+    }
+
+    // возвращает количество оставшихся кораблей вражеского флота
+    public int getShipsCount() {
+        return ships.size();
+    }
 }
