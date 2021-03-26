@@ -4,7 +4,9 @@ import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 
 // корабль представителя вражеского флота
-public class EnemyShip extends Ship{
+public class EnemyShip extends Ship {
+
+    public int score = 15;
 
     public EnemyShip(double x, double y) {
         super(x, y);

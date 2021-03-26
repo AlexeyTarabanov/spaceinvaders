@@ -269,6 +269,13 @@ import java.util.List;
   - в методе check() добавил условие проверки
 
  Шаг 33.
+ 1. В классе EnemyShip:
+  - создал и проинициализировал поле score
+ (счет очков)
+ 2. В классе EnemyFleet:
+  - отрефакторил метод verifyHit()
+
+ Шаг 34.
  1.
 
  */
@@ -292,6 +299,7 @@ public class SpaceInvadersGame extends Game {
     private List<Bullet> playerBullets;
     // максимальное количество пуль
     private static final int PLAYER_BULLETS_MAX = 1;
+    private int score;
 
     private boolean isGameStopped;
     private int animationsCount;
@@ -313,6 +321,7 @@ public class SpaceInvadersGame extends Game {
         isGameStopped = false;
         animationsCount = 0;
         playerBullets = new ArrayList<>();
+        score = 0;
         drawScene();
         // задает частоту работы этого метода onTurn
         setTurnTimer(40);
@@ -329,6 +338,7 @@ public class SpaceInvadersGame extends Game {
         if (bullet != null) {
             enemyBullets.add(bullet);
         }
+        setScore(score);
         drawScene();
     }
 
@@ -390,8 +400,9 @@ public class SpaceInvadersGame extends Game {
             // получаем следующий элемент
             Bullet bulletNext = bulletIterator.next();
             // если пуля потрачена (нежива - попала в цель) или вылетела за пределы экрана
-            if (!bulletNext.isAlive || bulletNext.y >= HEIGHT - 1)
+            if (!bulletNext.isAlive || bulletNext.y >= HEIGHT - 1) {
                 bulletIterator.remove();
+            }
         }
 
         playerBullets.removeIf(bullet -> !bullet.isAlive || (bullet.y + bullet.height) < 0);
@@ -407,7 +418,7 @@ public class SpaceInvadersGame extends Game {
         if (!playerShip.isAlive) {
             stopGameWithDelay();
         }
-     //необходимо вызвать метод getBottomBorder() у объекта enemyFleet.
+
         if (enemyFleet.getBottomBorder() >= playerShip.y) {
             playerShip.kill();
         }
@@ -415,6 +426,8 @@ public class SpaceInvadersGame extends Game {
             playerShip.win();
             stopGameWithDelay();
         }
+
+        score += enemyFleet.verifyHit(playerBullets);
     }
 
     // останавливает игру и выводить соответствующее сообщение на экран

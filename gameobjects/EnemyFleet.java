@@ -118,16 +118,25 @@ public class EnemyFleet {
     }
 
     // проверка попаданий пуль игрока во вражеские корабли
-    public void verifyHit(List<Bullet> bullets) {
-        for (Ship ship : ships) {
+    public int verifyHit(List<Bullet> bullets) {
+        if (bullets.isEmpty()) {
+            return 0;
+        }
+
+        int sumValue = 0;
+
+        for (EnemyShip ship : ships) {
             for (Bullet bullet : bullets) {
                 // если пересечение корабля и пули есть и корабль "жив" и эта пуля "живая"
                 if (ship.isCollision(bullet) && ship.isAlive && bullet.isAlive) {
                     ship.kill();
                     bullet.kill();
+                    sumValue += ship.score;
                 }
             }
         }
+
+        return sumValue;
     }
 
     // удаляет из списка "убитые" корабли
